@@ -17,26 +17,34 @@ class Game(object):
     """
 
     def __init__(
-        self, r: Score = 3, s: Score = 0, t: Score = 5, p: Score = 1
+        self, r: Score = 3, s: Score = 0, t: Score = 5, p: Score = 1, rc: Score = 3, sc: Score = 0, tc: Score = 5, pc: Score = 1
     ) -> None:
         """Create a new game object.
 
         Parameters
         ----------
         r: int or float
-            Score obtained by both players for mutual cooperation.
+            Score obtained by row players for mutual cooperation.
         s: int or float
-            Score obtained by a player for cooperating against a defector.
+            Score obtained by row player for cooperating against column defector.
         t: int or float
-            Score obtained by a player for defecting against a cooperator.
+            Score obtained by row player for defecting against column cooperator.
         p: int or float
-            Score obtained by both player for mutual defection.
+            Score obtained by row player for mutual defection.
+        rc: int or float
+            Score obtained by column players for mutual cooperation.
+        sc: int or float
+            Score obtained by column player for cooperating against row defector.
+        tc: int or float
+            Score obtained by column player for defecting against row cooperator.
+        pc: int or float
+            Score obtained by column player for mutual defection.    
         """
         self.scores = {
-            (C, C): (r, r),
-            (D, D): (p, p),
-            (C, D): (s, t),
-            (D, C): (t, s),
+            (C, C): (r, rc),
+            (D, D): (p, pc),
+            (C, D): (s, tc),
+            (D, C): (t, sc),
         }
 
     def RPST(self) -> Tuple[Score, Score, Score, Score]:

@@ -359,25 +359,43 @@ def games(draw, prisoners_dilemma=True, max_value=100):
     """
 
     if prisoners_dilemma:
-        s_upper_bound = max_value - 4  # Ensures there is enough room
-        s = draw(integers(max_value=s_upper_bound))
+        # s_upper_bound = max_value - 4  # Ensures there is enough room
+        # s = draw(integers(max_value=s_upper_bound))
 
-        t_lower_bound = s + 3  # Ensures there is enough room
-        t = draw(integers(min_value=t_lower_bound, max_value=max_value))
+        # t_lower_bound = s + 3  # Ensures there is enough room
+        # t = draw(integers(min_value=t_lower_bound, max_value=max_value))
 
-        r_upper_bound = t - 1
-        r_lower_bound = min(max(int((t + s) / 2), s) + 2, r_upper_bound)
-        r = draw(integers(min_value=r_lower_bound, max_value=r_upper_bound))
+        # r_upper_bound = t - 1
+        # r_lower_bound = min(max(int((t + s) / 2), s) + 2, r_upper_bound)
+        # r = draw(integers(min_value=r_lower_bound, max_value=r_upper_bound))
 
-        p_lower_bound = s + 1
-        p_upper_bound = r - 1
-        p = draw(integers(min_value=p_lower_bound, max_value=p_upper_bound))
+        # p_lower_bound = s + 1
+        # p_upper_bound = r - 1
+        # p = draw(integers(min_value=p_lower_bound, max_value=p_upper_bound))
+        b1 = 15
+        b2 = 15
+        c1 = 5
+        c2 = 5
+
+        r = b2 - c1
+        t = b2
+        s = -c1
+        p = 0
+
+        rc = b1 - c2
+        sc = -c2
+        tc = b1
+        pc = 0
 
     else:
         s = draw(integers(max_value=max_value))
         t = draw(integers(max_value=max_value))
         r = draw(integers(max_value=max_value))
         p = draw(integers(max_value=max_value))
+        sc = draw(integers(max_value=max_value))
+        tc = draw(integers(max_value=max_value))
+        rc = draw(integers(max_value=max_value))
+        pc = draw(integers(max_value=max_value))
 
-    game = axl.Game(r=r, s=s, t=t, p=p)
+    game = axl.Game(r=r, s=s, t=t, p=p, r=rc, s=sc, t=tc, p=pc)
     return game
